@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CountryCard from './CountryCard.js';
+import styles from './Countries.module.css';
 
 const Countries = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ const Countries = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
+    <div className={styles.country_list}>
       {data.map(country => (
         <CountryCard key={country.name.common} {...country} />
       ))}
