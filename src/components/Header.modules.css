@@ -1,0 +1,17 @@
+header {
+  background-color: #111;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  padding: 1rem;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  padding-left: 1rem;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+}

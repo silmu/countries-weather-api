@@ -7,6 +7,7 @@ const CountrySingle = () => {
   const [countryToShow, setCountryToShow] = useState('');
   const [degrees, setDegrees] = useState('');
   const [weatherState, setWeatherState] = useState('');
+  const [imgLink, setImgLink] = useState('');
 
   const countryObject = location.state.data;
   const API_key = process.env.REACT_APP_API_KEY;
@@ -23,9 +24,12 @@ const CountrySingle = () => {
       )
       .then(res => {
         setCountryToShow(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         setDegrees(res.data.list[0].main.temp);
         setWeatherState(res.data.list[0].weather[0].description);
+        setImgLink(
+          `http://openweathermap.org/img/wn/${res.data.list[0].weather[0]?.icon}@2x.png`
+        );
       })
       .catch(err => console.log(err));
   };
@@ -41,9 +45,7 @@ const CountrySingle = () => {
         Right now it is {degrees} °C in {countryObject.name.common} and{' '}
         {weatherState}
       </div>
-      {/* <img
-        src={`http://openweathermap.org/img/wn/${countryObject.weather[0]?.icon}@2x.png`}
-      /> */}
+      <img src={imgLink} alt={countryObject.name.common} />
     </div>
   );
 };
