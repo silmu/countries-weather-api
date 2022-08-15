@@ -1,0 +1,13 @@
+.countryCard {
+  border: 1px solid rgb(234, 234, 234);
+  padding: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+}
+.container_header_countryCard {
+  background-color: rgb(66, 166, 199);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.content_countryCard {
+}
