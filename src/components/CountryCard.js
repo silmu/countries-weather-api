@@ -2,15 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CountryCard.module.css';
 
-const CountryCard = ({
-  name,
-  languages,
-  currencies,
-  population,
-  timezones,
-}) => {
-  //   console.log(props.timezones.map(timezone => timezone));
-  const link = name.common;
+const CountryCard = props => {
+  const { name, languages, currencies, population, timezones } = props;
+  //   console.log(props);
 
   return (
     <div className={styles.countryCard}>
@@ -54,7 +48,7 @@ const CountryCard = ({
           <div>{population}</div>
         </div>
       </div>
-      <Link to={link} state={{ from: 'countries', data: name }}>
+      <Link to={name.common} state={{ from: 'countries', data: props }}>
         {' '}
         Read more...
       </Link>
