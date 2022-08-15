@@ -5,15 +5,18 @@ import styles from './Countries.module.css';
 
 const Countries = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   const fetchCountries = () => {
     axios
       .get('https://restcountries.com/v3.1/all')
       .catch(err => console.log(err))
       .then(res => {
-        setData(res.data);
-        // console.log(res.data);
+        const sortedCountries = res.data.sort((a, b) =>
+          a.name.common < b.name.common ? -1 : 0
+        );
+        setCountries(sortedCountries);
+        console.log(sortedCountries);
         setLoading(false);
       });
   };
@@ -28,7 +31,7 @@ const Countries = () => {
   }
   return (
     <div className={styles.country_list}>
-      {data.map(country => (
+      {countries.map(country => (
         <CountryCard key={country.name.common} {...country} />
       ))}
     </div>

@@ -20,7 +20,7 @@ const CountryCard = props => {
         <div className={styles.content_countryCard}>
           <div className={styles.content_section}>
             <h3>Language(s)</h3>
-            <ul>
+            <ul className={styles.list_properties}>
               {Object.values(languages || {}).map(language => (
                 <li key={language}>{language}</li>
               ))}
@@ -28,7 +28,7 @@ const CountryCard = props => {
           </div>
           <div className={styles.content_section}>
             <h3>Currencie(s)</h3>
-            <ul>
+            <ul className={styles.list_properties}>
               {Object.entries(currencies || {}).map(currency =>
                 currency.map(entry =>
                   typeof entry !== 'object' ? (
@@ -42,7 +42,7 @@ const CountryCard = props => {
           </div>
           <div className={styles.content_section}>
             <h3>Timezone(s)</h3>
-            <ul>
+            <ul className={styles.list_properties}>
               {timezones.map(timezone => (
                 <li key={timezone}>{timezone}</li>
               ))}
@@ -50,7 +50,7 @@ const CountryCard = props => {
           </div>
           <div className={styles.content_section}>
             <h3>Population</h3>
-            <p>{population}</p>
+            <p>{population.toLocaleString()}</p>
           </div>
         </div>
       </Link>

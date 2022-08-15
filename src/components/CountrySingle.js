@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import styles from './CountrySingle.module.css';
 
 const CountrySingle = () => {
   const location = useLocation();
@@ -39,7 +40,7 @@ const CountrySingle = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container_countrySingle}>
       <h2>{countryObject.name.common}</h2>
       <div>
         Right now it is {degrees} °C in {countryObject.name.common} and{' '}
