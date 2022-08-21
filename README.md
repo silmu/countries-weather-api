@@ -1,6 +1,7 @@
-# Simple React App
+# Countries & Weather 🌎 - React App
 
-React application that is using REST Countries API and Open Weather API
+React application that is using REST Countries API and Open Weather API.
+It shows detailed information about countries. Today's weather is shown for the countries' capitals.
 
 # Getting started
 
