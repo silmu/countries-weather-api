@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CountryCard from './CountryCard.js';
+import LoadingSpinner from './UI elements/LoadingSpinner';
 import styles from './Countries.module.css';
 
 const Countries = () => {
@@ -16,7 +17,6 @@ const Countries = () => {
           a.name.common < b.name.common ? -1 : 0
         );
         setCountries(sortedCountries);
-        console.log(sortedCountries);
         setLoading(false);
       });
   };
@@ -27,7 +27,7 @@ const Countries = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
   return (
     <div className={styles.country_list}>
