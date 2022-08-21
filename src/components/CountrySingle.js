@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './CountrySingle.module.css';
 
 const CountrySingle = () => {
   const location = useLocation();
-  const [countryToShow, setCountryToShow] = useState('');
+  const navigate = useNavigate();
   const [degrees, setDegrees] = useState('');
   const [weatherState, setWeatherState] = useState('');
   const [imgLink, setImgLink] = useState('');
 
-  const countryObject = location.state.data;
+  const country = location.state.country;
+  const countries = location.state.countries;
   const API_key = process.env.REACT_APP_API_KEY;
-  //   console.log(countryObject);
-  //   console.log(API_key);
 
   const getWeather = country => {
     const lat = country.latlng[0];
@@ -21,11 +20,9 @@ const CountrySingle = () => {
 
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=148ca8be204798aa685efe2fe8a9cbfd&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_key}&units=metric`
       )
       .then(res => {
-        setCountryToShow(res.data);
-        // console.log(res.data);
         setDegrees(res.data.list[0].main.temp);
         setWeatherState(res.data.list[0].weather[0].description);
         setImgLink(
@@ -36,17 +33,43 @@ const CountrySingle = () => {
   };
 
   useEffect(() => {
-    getWeather(countryObject);
+    getWeather(country);
   }, []);
+
+  const findCountryByCode = code => {
+    console.log(country.borders);
+    const result = countries.filter(c => c.cca3 === code);
+    // Unwrap result object from array
+    return result[0];
+  };
 
   return (
     <div className={styles.container_countrySingle}>
-      <h2>{countryObject.name.common}</h2>
+      <h2>{country.name.common}</h2>
       <div>
-        Right now it is {degrees} °C in {countryObject.name.common} and{' '}
-        {weatherState}
+        Right now it is {degrees} °C in {country.name.common} and {weatherState}
       </div>
-      <img src={imgLink} alt={countryObject.name.common} />
+      <div>
+        <img src={imgLink} alt={country.name.common} />
+      </div>
+      <h3>Bordering countries:</h3>
+      {Object.values(country.borders).map(border => {
+        return (
+          <button
+            key={border}
+            onClick={() =>
+              navigate(`/countries/${border}`, {
+                state: {
+                  countries: countries,
+                  country: findCountryByCode(border),
+                },
+              })
+            }
+          >
+            {findCountryByCode(border).name.common}
+          </button>
+        );
+      })}
     </div>
   );
 };

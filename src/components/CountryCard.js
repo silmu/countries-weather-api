@@ -2,13 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CountryCard.module.css';
 
-const CountryCard = props => {
-  const { name, languages, currencies, population, timezones, flags } = props;
+const CountryCard = ({ country, countries }) => {
+  const { name, languages, currencies, population, timezones, flags } = country;
   //   console.log(props);
 
   return (
     <div className={styles.countryCard}>
-      <Link to={name.common} state={{ from: 'countries', data: props }}>
+      {/* The whole card is wrapped in a Link */}
+      <Link
+        to={name.common}
+        state={{ from: 'countries', country: country, countries: countries }}
+      >
         <div className={styles.image_countryCard}>
           <img src={flags.svg} alt={name.common} />
         </div>

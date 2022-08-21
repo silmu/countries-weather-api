@@ -32,7 +32,11 @@ const Countries = () => {
   return (
     <div className={styles.country_list}>
       {countries.map(country => (
-        <CountryCard key={country.name.common} {...country} />
+        <CountryCard
+          key={country.name.common}
+          country={country}
+          countries={countries}
+        />
       ))}
     </div>
   );

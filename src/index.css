@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:ital,wght@0,100;0,500;0,700;0,900;1,400&display=swap');
 
 * {
   padding: 0;
@@ -15,6 +15,39 @@ main {
   background: url('https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80')
     center center/cover no-repeat fixed padding-box border-box #ccc;
   margin: 0 auto;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   max-width: 1200px;
+}
+
+.container_home {
+  color: white;
+  font-weight: 100;
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 50vw;
+}
+
+.errorPage {
+  font-family: 'Concert One', cursive;
+  text-align: center;
+  height: calc(100vh - 100px);
+  background-color: white;
+}
+
+.errorPage p {
+  display: inline-block;
+  font-size: 10rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: tomato;
+  color: white;
+  box-shadow: 5px 5px 0 rgb(177, 177, 177);
+}
+
+.errorPage p:hover {
+  transform: scale(1.03);
+}
+
+.errorPage img {
+  height: min-content;
 }
