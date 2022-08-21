@@ -4,3 +4,7 @@
   border-radius: 10px;
   width: fit-content;
 }
+
+.container_countrySingle p {
+  font-weight: 300;
+}

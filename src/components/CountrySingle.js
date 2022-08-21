@@ -15,6 +15,8 @@ const CountrySingle = () => {
   const countries = location.state.countries;
   const API_key = process.env.REACT_APP_API_KEY;
 
+  let countryName = country.name.common;
+
   const getWeather = country => {
     const lat = country.latlng[0];
     const lon = country.latlng[1];
@@ -38,7 +40,6 @@ const CountrySingle = () => {
   }, []);
 
   const findCountryByCode = code => {
-    console.log(country.borders);
     const result = countries.filter(c => c.cca3 === code);
     // Unwrap result object from array
     return result[0];
@@ -46,28 +47,54 @@ const CountrySingle = () => {
 
   return (
     <div className={styles.container_countrySingle}>
-      <h2>{country.name.common}</h2>
+      <h2>{countryName}</h2>
       <div>
-        Right now it is {degrees} °C in {country.name.common} and {weatherState}
+        Right now it is {degrees} °C in {countryName} and {weatherState}
       </div>
       <div>
-        <img src={imgLink} alt={country.name.common} />
+        <img src={imgLink} alt={countryName} />
       </div>
       <h3>Bordering countries:</h3>
-      {Object.values(country.borders).map(border => {
+      {country.borders === undefined ? (
+        <p>Bordering countries are not found.</p>
+      ) : (
+        ''
+      )}
+      {Object.values(country.borders || {}).map(border => {
+        const borderObject = findCountryByCode(border);
+        const borderName = borderObject.name.common;
         return (
-          <Button
-            key={border}
-            click={() =>
-              navigate(`/countries/${border}`, {
-                state: {
+          <span key={borderName}>
+            {/* 
+            *
+            Alternative solution with Link
+            *
+            <Button>
+              <Link
+                to={`/countries/${border}`}
+                state={{
                   countries: countries,
                   country: findCountryByCode(border),
-                },
-              })
-            }
-            name={findCountryByCode(border).name.common}
-          />
+                }}
+              >
+                {findCountryByCode(border).name.common}
+              </Link>
+            </Button> 
+            */}
+
+            <Button
+              click={() =>
+                navigate(`/countries/${borderName}`, {
+                  state: {
+                    countries: countries,
+                    country: borderObject,
+                  },
+                })
+              }
+            >
+              {borderName}
+            </Button>
+          </span>
         );
       })}
     </div>

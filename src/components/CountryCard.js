@@ -4,7 +4,6 @@ import styles from './CountryCard.module.css';
 
 const CountryCard = ({ country, countries }) => {
   const { name, languages, currencies, population, timezones, flags } = country;
-  //   console.log(props);
 
   return (
     <div className={styles.countryCard}>

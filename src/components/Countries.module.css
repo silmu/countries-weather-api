@@ -5,3 +5,7 @@
   justify-content: space-around;
   width: fit-content;
 }
+
+.loading {
+  color: white;
+}
