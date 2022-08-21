@@ -1,0 +1,18 @@
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  background-color: rgb(50, 195, 243);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  filter: hue-rotate(180deg);
+}
+
+.btn:active {
+  transform: scale(1.2);
+}

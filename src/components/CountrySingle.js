@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './CountrySingle.module.css';
+import Button from './UI elements/Button';
 
 const CountrySingle = () => {
   const location = useLocation();
@@ -55,9 +56,9 @@ const CountrySingle = () => {
       <h3>Bordering countries:</h3>
       {Object.values(country.borders).map(border => {
         return (
-          <button
+          <Button
             key={border}
-            onClick={() =>
+            click={() =>
               navigate(`/countries/${border}`, {
                 state: {
                   countries: countries,
@@ -65,9 +66,8 @@ const CountrySingle = () => {
                 },
               })
             }
-          >
-            {findCountryByCode(border).name.common}
-          </button>
+            name={findCountryByCode(border).name.common}
+          />
         );
       })}
     </div>
