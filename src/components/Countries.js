@@ -1,44 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import CountryCard from './CountryCard.js';
 import LoadingSpinner from './UI elements/LoadingSpinner';
-import styles from './Countries.module.css';
+import Grid from '@mui/material/Grid';
 
-const Countries = () => {
-  const [loading, setLoading] = useState(false);
-  const [countries, setCountries] = useState([]);
-
-  const fetchCountries = () => {
-    axios
-      .get('https://restcountries.com/v3.1/all')
-      .catch(err => console.log(err))
-      .then(res => {
-        const sortedCountries = res.data.sort((a, b) =>
-          a.name.common < b.name.common ? -1 : 0
-        );
-        setCountries(sortedCountries);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    fetchCountries();
-  }, []);
-
+const Countries = ({ countries, loading, filtered }) => {
   if (loading) {
     return <LoadingSpinner />;
   }
   return (
-    <div className={styles.country_list}>
-      {countries.map(country => (
-        <CountryCard
-          key={country.name.common}
-          country={country}
-          countries={countries}
-        />
+    <Grid
+      container
+      spacing={{ xs: 2, md: 4 }}
+      columns={{ xs: 2, sm: 8, md: 12 }}
+    >
+      {filtered.map(country => (
+        <Grid item xs={2} sm={4} md={4} key={country.name.common}>
+          <CountryCard country={country} countries={countries} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 export default Countries;

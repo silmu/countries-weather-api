@@ -2,10 +2,10 @@ import React from 'react';
 import Header from '../components/Header';
 import Main from '../components/Main';
 
-const Layout = () => {
+const Layout = ({ countries, search, setFiltered }) => {
   return (
     <div>
-      <Header />
+      <Header search={search} />
       <Main />
     </div>
   );

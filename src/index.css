@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
 
 * {
   padding: 0;
@@ -17,6 +17,10 @@ main {
   margin: 0 auto;
   min-height: calc(100vh - 100px);
   max-width: 1200px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container_home {
