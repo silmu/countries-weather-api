@@ -9,8 +9,9 @@ It shows detailed information about countries. Today's weather is shown for the 
 
 # Getting started
 
-1. Run `npm init` to install dependencies
-2. Run `npm start` to start the application
+1. Clone repository
+2. Run `npm init` to install dependencies
+3. Run `npm start` to start the application
 
 # Tech stack
 
