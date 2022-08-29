@@ -17,6 +17,7 @@ const CountryCard = ({ country, countries }) => {
         <Link
           to={name.common}
           state={{ from: 'countries', country: country, countries: countries }}
+          style={{ color: 'black' }}
         >
           <CardMedia
             component='img'
@@ -32,12 +33,17 @@ const CountryCard = ({ country, countries }) => {
               {name.official}
             </Typography>
 
-            <Grid container>
-              <Grid item xs={4}>
+            <Grid container sx={{ padding: '1rem' }}>
+              <Grid item xs={4} sx={{ marginRight: '3rem' }}>
                 <Typography gutterBottom variant='subtitle2' component='div'>
                   Language(s)
                 </Typography>
-                <Typography gutterBottom variant='body2' component='ul'>
+                <Typography
+                  gutterBottom
+                  variant='body2'
+                  component='ul'
+                  sx={{ color: 'gray' }}
+                >
                   {Object.values(languages || {}).map(language => (
                     <li key={language}>{language}</li>
                   ))}
@@ -45,7 +51,12 @@ const CountryCard = ({ country, countries }) => {
                 <Typography gutterBottom variant='subtitle2' component='div'>
                   Currencie(s)
                 </Typography>
-                <Typography gutterBottom variant='body2' component='ul'>
+                <Typography
+                  gutterBottom
+                  variant='body2'
+                  component='ul'
+                  sx={{ color: 'gray' }}
+                >
                   {Object.values(currencies || {}).map((currency, i) => (
                     <li key={i}>
                       {currency.name} ({currency.symbol})
@@ -57,7 +68,12 @@ const CountryCard = ({ country, countries }) => {
                 <Typography gutterBottom variant='subtitle2' component='div'>
                   Timezone(s)
                 </Typography>
-                <Typography gutterBottom variant='body2' component='ul'>
+                <Typography
+                  gutterBottom
+                  variant='body2'
+                  component='ul'
+                  sx={{ color: 'gray' }}
+                >
                   {timezones.map(timezone => (
                     <li key={timezone}>{timezone}</li>
                   ))}
@@ -65,21 +81,16 @@ const CountryCard = ({ country, countries }) => {
                 <Typography gutterBottom variant='subtitle2' component='div'>
                   Population
                 </Typography>
-                <Typography gutterBottom variant='body2' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='body2'
+                  component='div'
+                  sx={{ color: 'gray' }}
+                >
                   {population.toLocaleString()}
                 </Typography>
               </Grid>
             </Grid>
-
-            {/* {Object.entries(currencies || {}).map(currency =>
-                currency.map(entry =>
-                  typeof entry !== 'object' ? (
-                    ''
-                  ) : (
-                    <li key={entry.name}>{entry.name}</li>
-                  )
-                )
-              )} */}
           </CardContent>
         </Link>
       </CardActionArea>
