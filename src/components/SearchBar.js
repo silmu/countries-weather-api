@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import { search } from '../features/countries/countriesSlice';
+import { useDispatch } from 'react-redux';
 
-const SearchBar = ({ search }) => {
-  const [searched, setSearched] = useState('');
+const SearchBar = (/*{ search }*/) => {
+  // const [searched, setSearched] = useState('');
+  const dispatch = useDispatch();
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -48,10 +51,10 @@ const SearchBar = ({ search }) => {
     },
   }));
 
-  const handleSearchInput = e => {
-    setSearched(e.target.value);
-    search(e.target.value);
-  };
+  // const handleSearchInput = e => {
+  //   setSearched(e.target.value);
+  //   search(e.target.value);
+  // };
 
   return (
     <>
@@ -62,8 +65,9 @@ const SearchBar = ({ search }) => {
         <StyledInputBase
           placeholder='Search…'
           inputProps={{ 'aria-label': 'search' }}
-          value={searched}
-          onChange={handleSearchInput}
+          // value={search}
+          // onChange={handleSearchInput}
+          onChange={e => dispatch(search(e.target.value))}
           autoFocus
         />
       </Search>
