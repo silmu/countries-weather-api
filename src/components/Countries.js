@@ -11,7 +11,7 @@ import {
 const Countries = (/*{ countries, loading, filtered }*/) => {
   const dispatch = useDispatch();
 
-  const countriesList = useSelector(state => state.countries.countries);
+  const countriesList = useSelector(state => state.countries.countriesList);
   const loading = useSelector(state => state.countries.isLoading);
   const searchInput = useSelector(state => state.countries.search);
 
@@ -31,11 +31,15 @@ const Countries = (/*{ countries, loading, filtered }*/) => {
       {/*countries.filter(c =>
         c.name.common.toLowerCase().includes(searched.toLowerCase())*/}
       {/* filtered */}
-      {countriesList.map(country => (
-        <Grid item xs={2} sm={4} md={4} key={country.name.common}>
-          <CountryCard country={country} countries={countriesList} />
-        </Grid>
-      ))}
+      {countriesList
+        .filter(c =>
+          c.name.common.toLowerCase().includes(searchInput.toLowerCase())
+        )
+        .map(country => (
+          <Grid item xs={2} sm={4} md={4} key={country.name.common}>
+            <CountryCard country={country} countries={countriesList} />
+          </Grid>
+        ))}
     </Grid>
   );
 };
