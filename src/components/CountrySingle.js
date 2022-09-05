@@ -37,7 +37,7 @@ const CountrySingle = () => {
 
   useEffect(() => {
     getWeather(country);
-  }, []);
+  }, [country]);
 
   const findCountryByCode = code => {
     const result = countries.filter(c => c.cca3 === code);
