@@ -37,6 +37,7 @@ const CountrySingle = () => {
 
   useEffect(() => {
     getWeather(country);
+    console.log(country);
   }, [country]);
 
   const findCountryByCode = code => {
@@ -48,8 +49,10 @@ const CountrySingle = () => {
   return (
     <div className={styles.container_countrySingle}>
       <h2>{countryName}</h2>
+      <h3>{country.capital?.[0]}</h3>
       <div>
-        Right now it is {degrees} °C in {countryName} and {weatherState}
+        Right now it is {degrees} °C in {country.capital?.[0] ?? countryName}{' '}
+        and {weatherState}
       </div>
       <div>
         <img src={imgLink} alt={countryName} />
@@ -97,6 +100,7 @@ const CountrySingle = () => {
           </span>
         );
       })}
+      <Button click={() => navigate('/countries')}>Back to countries</Button>
     </div>
   );
 };
