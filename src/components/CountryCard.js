@@ -7,6 +7,11 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
+import LanguageIcon from '@mui/icons-material/Language';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import PeopleIcon from '@mui/icons-material/People';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
 const CountryCard = ({ country, countries }) => {
   const { name, languages, currencies, population, timezones, flags } = country;
 
@@ -26,66 +31,56 @@ const CountryCard = ({ country, countries }) => {
             alt={name.common}
           />
           <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
+            <Typography variant='h5' fontSize='1.2rem'>
               {name.common}
             </Typography>
-            <Typography gutterBottom variant='button' component='div'>
+            <Typography gutterBottom variant='button' fontSize='0.8rem'>
               {name.official}
             </Typography>
 
-            <Grid container sx={{ padding: '1rem' }}>
-              <Grid item xs={4} sx={{ marginRight: '3rem' }}>
-                <Typography gutterBottom variant='subtitle2' component='div'>
-                  Language(s)
+            <Grid container marginTop='0.5rem'>
+              <Grid item sx={{ width: '45%', marginRight: '10%' }}>
+                <Typography gutterBottom variant='subtitle2'>
+                  <LanguageIcon fontSize='16px' /> Language(s)
                 </Typography>
                 <Typography
                   gutterBottom
-                  variant='body2'
-                  component='ul'
+                  variant='caption'
                   sx={{ color: 'gray' }}
                 >
                   {Object.values(languages || {}).map(language => (
-                    <li key={language}>{language}</li>
+                    <div key={language}>{language}</div>
                   ))}
                 </Typography>
-                <Typography gutterBottom variant='subtitle2' component='div'>
+                <Typography gutterBottom variant='subtitle2'>
+                  <AttachMoneyIcon fontSize='16px' />
                   Currencie(s)
                 </Typography>
-                <Typography
-                  gutterBottom
-                  variant='body2'
-                  component='ul'
-                  sx={{ color: 'gray' }}
-                >
-                  {Object.values(currencies || {}).map((currency, i) => (
-                    <li key={i}>
-                      {currency.name} ({currency.symbol})
-                    </li>
+                <Typography gutterBottom variant='caption' color='gray'>
+                  {Object.values(currencies || {}).map(currency => (
+                    <div key={currency.name}>
+                      {currency.symbol} - {currency.name}
+                    </div>
                   ))}
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
-                <Typography gutterBottom variant='subtitle2' component='div'>
-                  Timezone(s)
+              <Grid item sx={{ width: '45%' }}>
+                <Typography gutterBottom variant='subtitle2'>
+                  <AccessTimeIcon fontSize='16px' /> Timezone(s)
+                </Typography>
+                <Typography gutterBottom variant='caption' color='gray'>
+                  <div>{timezones[0]}</div>
+                  <div>{timezones?.[1]}</div>
+                  {timezones?.[2] ? '...' : ''}
+                </Typography>
+                <Typography gutterBottom variant='subtitle2'>
+                  <PeopleIcon fontSize='16px' /> Population
                 </Typography>
                 <Typography
                   gutterBottom
-                  variant='body2'
-                  component='ul'
-                  sx={{ color: 'gray' }}
-                >
-                  {timezones.map(timezone => (
-                    <li key={timezone}>{timezone}</li>
-                  ))}
-                </Typography>
-                <Typography gutterBottom variant='subtitle2' component='div'>
-                  Population
-                </Typography>
-                <Typography
-                  gutterBottom
-                  variant='body2'
+                  variant='caption'
                   component='div'
-                  sx={{ color: 'gray' }}
+                  color='gray'
                 >
                   {population.toLocaleString()}
                 </Typography>
