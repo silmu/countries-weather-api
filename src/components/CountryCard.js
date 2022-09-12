@@ -48,7 +48,7 @@ const CountryCard = ({ country }) => {
   };
 
   return (
-    <Card sx={{ width: 300, height: 500 }}>
+    <Card sx={{ width: 300, height: 500, position: 'relative' }}>
       {/* The whole card is wrapped in a Link */}
       <CardActionArea>
         <Link
@@ -122,11 +122,17 @@ const CountryCard = ({ country }) => {
         </Link>
       </CardActionArea>
       {checkIfInFavs() ? (
-        <IconButton onClick={() => removeFromFavs(country)}>
+        <IconButton
+          onClick={() => removeFromFavs(country)}
+          sx={{ position: 'absolute', bottom: '0', zindex: '4' }}
+        >
           <FavoriteIcon />
         </IconButton>
       ) : (
-        <IconButton onClick={() => addToFavs(country)}>
+        <IconButton
+          onClick={() => addToFavs(country)}
+          sx={{ position: 'absolute', bottom: '0', zindex: '3' }}
+        >
           <FavoriteBorderIcon />
         </IconButton>
       )}

@@ -21,7 +21,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeFavorites());
-    console.log('Favorites are initialized');
   }, [dispatch]);
 
   return (

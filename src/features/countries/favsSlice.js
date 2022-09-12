@@ -8,7 +8,6 @@ export const favsSlice = createSlice({
   reducers: {
     setFavorites(state, action) {
       state.favoritesList = action.payload;
-      console.log('Favorites are set to ', state.favoritesList);
     },
     addToFavorites(state, action) {
       state.favoritesList = [...state.favoritesList, action.payload];

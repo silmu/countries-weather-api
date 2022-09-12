@@ -78,7 +78,7 @@ const Header = ({ search }) => {
               {/* ...............Mobile menu end............... */}
               {/* ...................Menu links................ */}
               {links.map(link => (
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem onClick={handleCloseNavMenu} key={link.name}>
                   <Typography textAlign='center'>
                     <Link className={styles.hamburgerLink} to={link.link}>
                       {link.name}
@@ -91,7 +91,10 @@ const Header = ({ search }) => {
           </Box>
           {/* ................Menu............... */}
           {links.map(link => (
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+              key={link.name}
+            >
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
