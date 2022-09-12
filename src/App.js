@@ -5,6 +5,7 @@ import Layout from './pages/Layout';
 import Home from './pages/Home';
 import Countries from './components/Countries';
 import CountrySingle from './components/CountrySingle';
+import Favorites from './components/Favorites';
 import ErrorPage from './pages/ErrorPage';
 
 const RouterWrapper = props => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='countries' element={<Countries />} />
           <Route path='countries/:country' element={<RouterWrapper />} />
+          <Route path='favorites' element={<Favorites />} />
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>

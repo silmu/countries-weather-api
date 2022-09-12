@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
 
 import LanguageIcon from '@mui/icons-material/Language';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -14,6 +17,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const CountryCard = ({ country, countries }) => {
   const { name, languages, currencies, population, timezones, flags } = country;
+  const isFavorite = false;
 
   return (
     <Card sx={{ width: 300, height: 500 }}>
@@ -89,6 +93,15 @@ const CountryCard = ({ country, countries }) => {
           </CardContent>
         </Link>
       </CardActionArea>
+      {isFavorite ? (
+        <IconButton>
+          <FavoriteIcon />
+        </IconButton>
+      ) : (
+        <IconButton>
+          <FavoriteBorderIcon />
+        </IconButton>
+      )}
     </Card>
   );
 };

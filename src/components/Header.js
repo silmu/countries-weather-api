@@ -81,6 +81,13 @@ const Header = ({ search }) => {
                   </Link>
                 </Typography>
               </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign='center'>
+                  <Link className={styles.hamburgerLink} to='/favorites'>
+                    Favorites
+                  </Link>
+                </Typography>
+              </MenuItem>
               {/* .................Menu links end................... */}
             </Menu>
           </Box>
@@ -102,6 +109,16 @@ const Header = ({ search }) => {
             >
               <Link className={styles.link} to='/countries'>
                 Countries
+              </Link>
+            </Button>
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link className={styles.link} to='/favorites'>
+                Favorites
               </Link>
             </Button>
           </Box>
