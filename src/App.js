@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
 import Layout from './pages/Layout';
@@ -8,12 +8,22 @@ import CountrySingle from './components/CountrySingle';
 import Favorites from './components/Favorites';
 import ErrorPage from './pages/ErrorPage';
 
+import { initializeFavorites } from './features/countries/favsSlice';
+import { useDispatch } from 'react-redux';
+
 const RouterWrapper = props => {
   const params = useParams();
   return <CountrySingle params={params} {...props} />;
 };
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeFavorites());
+    console.log('Favorites are initialized');
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>

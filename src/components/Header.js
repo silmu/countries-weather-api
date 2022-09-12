@@ -13,8 +13,11 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import Search from './SearchBar';
 
+import { useSelector } from 'react-redux';
+
 const Header = ({ search }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const favsList = useSelector(state => state.favorites.favoritesList);
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -84,7 +87,7 @@ const Header = ({ search }) => {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign='center'>
                   <Link className={styles.hamburgerLink} to='/favorites'>
-                    Favorites
+                    Favorites ({favsList.length ?? 0})
                   </Link>
                 </Typography>
               </MenuItem>
@@ -118,7 +121,7 @@ const Header = ({ search }) => {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               <Link className={styles.link} to='/favorites'>
-                Favorites
+                Favorites ({favsList.length ?? 0})
               </Link>
             </Button>
           </Box>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,22 +9,50 @@ import Grid from '@mui/material/Grid';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
-
 import LanguageIcon from '@mui/icons-material/Language';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PeopleIcon from '@mui/icons-material/People';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-const CountryCard = ({ country, countries }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../features/countries/favsSlice';
+
+const CountryCard = ({ country }) => {
+  const favsList = useSelector(state => state.favorites.favoritesList);
+  const countries = useSelector(state => state.countries.countriesList);
   const { name, languages, currencies, population, timezones, flags } = country;
-  const isFavorite = false;
+  const dispatch = useDispatch();
+
+  const addToFavs = country => {
+    dispatch(addToFavorites(country));
+    // Set localStorage to favsList and new country
+    localStorage.setItem('favorites', JSON.stringify([...favsList, country]));
+  };
+
+  const removeFromFavs = country => {
+    dispatch(removeFromFavorites(country));
+    // Filter out country and set localStorage
+    const filteredFavs = JSON.parse(localStorage.getItem('favorites')).filter(
+      c => c.name.common !== country.name.common
+    );
+    localStorage.setItem('favorites', JSON.stringify([...filteredFavs]));
+  };
+
+  const checkIfInFavs = () => {
+    const arr = favsList.filter(c => c.name.common === country.name.common);
+
+    return arr.length > 0;
+  };
 
   return (
     <Card sx={{ width: 300, height: 500 }}>
       {/* The whole card is wrapped in a Link */}
       <CardActionArea>
         <Link
-          to={name.common}
+          to={`/countries/${name.common}`}
           state={{ from: 'countries', country: country, countries: countries }}
           style={{ color: 'black' }}
         >
@@ -93,12 +121,12 @@ const CountryCard = ({ country, countries }) => {
           </CardContent>
         </Link>
       </CardActionArea>
-      {isFavorite ? (
-        <IconButton>
+      {checkIfInFavs() ? (
+        <IconButton onClick={() => removeFromFavs(country)}>
           <FavoriteIcon />
         </IconButton>
       ) : (
-        <IconButton>
+        <IconButton onClick={() => addToFavs(country)}>
           <FavoriteBorderIcon />
         </IconButton>
       )}

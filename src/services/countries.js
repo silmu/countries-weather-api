@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// Get all countries and sort alphabetically
 const baseUrl = 'https://restcountries.com/v3.1/all';
 
 const getAll = async () => {
