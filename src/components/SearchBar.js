@@ -60,6 +60,7 @@ const SearchBar = () => {
           placeholder='Search…'
           inputProps={{ 'aria-label': 'search' }}
           onChange={e => dispatch(search(e.target.value))}
+          onBlur={e => dispatch(search(e.target.value))}
           autoFocus
         />
       </Search>

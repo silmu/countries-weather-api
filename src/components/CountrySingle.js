@@ -39,7 +39,6 @@ const CountrySingle = () => {
 
   useEffect(() => {
     getWeather(country);
-    console.log(country);
   }, [country]);
 
   const findCountryByCode = code => {

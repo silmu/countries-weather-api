@@ -80,9 +80,12 @@ const CountryCard = ({ country }) => {
                   variant='caption'
                   sx={{ color: 'gray' }}
                 >
-                  {Object.values(languages || {}).map(language => (
+                  {/* {Object.values(languages || {}).map(language => (
                     <div key={language}>{language}</div>
-                  ))}
+                  ))} */}
+                  <div>{Object.values(languages || {})?.[0]}</div>
+                  <div>{Object.values(languages || {})?.[1]}</div>
+                  {Object.values(languages || {})?.[2] ? '...' : ''}
                 </Typography>
                 <Typography gutterBottom variant='subtitle2'>
                   <AttachMoneyIcon fontSize='16px' />
