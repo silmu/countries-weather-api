@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CountryCard from './CountryCard.js';
 import LoadingSpinner from './UI elements/LoadingSpinner';
 import Grid from '@mui/material/Grid';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeCountries } from '../features/countries/countriesSlice';
 
-const Countries = ({ countries, loading, filtered }) => {
+const Countries = () => {
+  const dispatch = useDispatch();
+
+  const countriesList = useSelector(state => state.countries.countriesList);
+  const loading = useSelector(state => state.countries.isLoading);
+  const searchInput = useSelector(state => state.countries.search);
+
+  useEffect(() => {
+    dispatch(initializeCountries());
+  }, [dispatch]);
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -13,11 +25,15 @@ const Countries = ({ countries, loading, filtered }) => {
       spacing={{ xs: 2, md: 4 }}
       columns={{ xs: 2, sm: 8, md: 12 }}
     >
-      {filtered.map(country => (
-        <Grid item xs={2} sm={4} md={4} key={country.name.common}>
-          <CountryCard country={country} countries={countries} />
-        </Grid>
-      ))}
+      {countriesList
+        .filter(c =>
+          c.name.common.toLowerCase().includes(searchInput.toLowerCase())
+        )
+        .map(country => (
+          <Grid item xs={2} sm={4} md={4} key={country.name.common}>
+            <CountryCard country={country} countries={countriesList} />
+          </Grid>
+        ))}
     </Grid>
   );
 };

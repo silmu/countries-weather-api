@@ -9,12 +9,22 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import styles from './Header.module.css';
+
 import Search from './SearchBar';
 
 const Header = ({ search }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const favsList = useSelector(state => state.favorites.favoritesList);
+  const links = [
+    { name: 'Home', link: '/' },
+    { name: 'Countries', link: '/countries' },
+    { name: `Favorites (${favsList.length ?? 0})`, link: '/favorites' },
+  ];
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -34,7 +44,7 @@ const Header = ({ search }) => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            {/* ................Hamburger menu.......................... */}
+            {/* ..............Hamburger icon........... */}
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -45,7 +55,7 @@ const Header = ({ search }) => {
             >
               <MenuIcon />
             </IconButton>
-            {/* ................Hamburger menu end..................... */}
+            {/* ..............Hamburger icon end............ */}
             {/* ...............Mobile menu..................... */}
             <Menu
               id='menu-appbar'
@@ -65,47 +75,37 @@ const Header = ({ search }) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {/* ................Mobile menu end..................... */}
-              {/* .....................Menu links..................... */}
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign='center'>
-                  <Link className={styles.hamburgerLink} to='/'>
-                    Home
-                  </Link>
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign='center'>
-                  <Link className={styles.hamburgerLink} to='/countries'>
-                    Countries
-                  </Link>
-                </Typography>
-              </MenuItem>
+              {/* ...............Mobile menu end............... */}
+              {/* ...................Menu links................ */}
+              {links.map(link => (
+                <MenuItem onClick={handleCloseNavMenu} key={link.name}>
+                  <Typography textAlign='center'>
+                    <Link className={styles.hamburgerLink} to={link.link}>
+                      {link.name}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
               {/* .................Menu links end................... */}
             </Menu>
           </Box>
-          {/* ................Menu..................... */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+          {/* ................Menu............... */}
+          {links.map(link => (
+            <Box
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+              key={link.name}
             >
-              <Link className={styles.link} to='/'>
-                Home
-              </Link>
-            </Button>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <Link className={styles.link} to='/countries'>
-                Countries
-              </Link>
-            </Button>
-          </Box>
-          {/* ................Menu end..................... */}
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link className={styles.link} to={link.link}>
+                  {link.name}
+                </Link>
+              </Button>
+            </Box>
+          ))}
+          {/* ................Menu end................. */}
           <Search search={search} />
         </Toolbar>
       </Container>

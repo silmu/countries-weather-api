@@ -1,18 +1,12 @@
 import React from 'react';
-import styles from './Button.module.css';
-import Btn from '@mui/material/Button';
+import Button from '@mui/material/Button';
 
-const Button = ({ click, children }) => {
+const Btn = ({ click, children, variant }) => {
   return (
-    <Btn
-      varian='contained'
-      type='button'
-      onClick={click}
-      className={styles.btn}
-    >
+    <Button variant={variant ?? 'text'} type='button' onClick={click}>
       {children}
-    </Btn>
+    </Button>
   );
 };
 
-export default Button;
+export default Btn;

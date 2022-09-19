@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './CountrySingle.module.css';
-import Button from './UI elements/Button';
+import Btn from './UI elements/Button';
+
+import Typography from '@mui/material/Typography';
 
 const CountrySingle = () => {
   const location = useLocation();
@@ -37,7 +39,7 @@ const CountrySingle = () => {
 
   useEffect(() => {
     getWeather(country);
-  }, []);
+  }, [country]);
 
   const findCountryByCode = code => {
     const result = countries.filter(c => c.cca3 === code);
@@ -47,14 +49,38 @@ const CountrySingle = () => {
 
   return (
     <div className={styles.container_countrySingle}>
-      <h2>{countryName}</h2>
+      <Typography gutterBottom variant='h2' fontSize='3rem'>
+        {countryName}
+      </Typography>
       <div>
-        Right now it is {degrees} °C in {countryName} and {weatherState}
+        {country.coatOfArms.svg ? (
+          <img
+            src={country.coatOfArms.svg}
+            alt='Coat of arms'
+            style={{ padding: '1rem', width: '150px', float: 'right' }}
+          />
+        ) : (
+          ''
+        )}
       </div>
+      <Typography>Capital: {country.capital?.[0]}</Typography>
+      <Typography>Area: {country.area.toLocaleString()} sqare km</Typography>
+      <Typography gutterBottom>
+        Continents: {country.continents.map(c => c)}
+      </Typography>
+      <Typography variant='h3' fontSize='1.5rem'>
+        Weather
+      </Typography>
+      <Typography>
+        Right now it is {degrees} °C in {country.capital?.[0] ?? countryName}{' '}
+        and {weatherState}
+      </Typography>
       <div>
-        <img src={imgLink} alt={countryName} />
+        <img src={imgLink} alt={countryName} float='right' />
       </div>
-      <h3>Bordering countries:</h3>
+      <Typography gutterBottom variant='h4' fontSize='1.1rem'>
+        Bordering countries:
+      </Typography>
       {country.borders === undefined ? (
         <p>Bordering countries are not found.</p>
       ) : (
@@ -82,7 +108,7 @@ const CountrySingle = () => {
             </Button> 
             */}
 
-            <Button
+            <Btn
               click={() =>
                 navigate(`/countries/${borderName}`, {
                   state: {
@@ -93,10 +119,15 @@ const CountrySingle = () => {
               }
             >
               {borderName}
-            </Button>
+            </Btn>
           </span>
         );
       })}
+      <div>
+        <Btn variant='contained' click={() => navigate('/countries')}>
+          Back to countries
+        </Btn>
+      </div>
     </div>
   );
 };
