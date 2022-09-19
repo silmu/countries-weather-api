@@ -61,6 +61,7 @@ const CountryCard = ({ country }) => {
             height='230'
             image={flags.svg}
             alt={name.common}
+            loading='lazy'
           />
           <CardContent>
             <Typography variant='h5' fontSize='1.2rem'>
