@@ -4,6 +4,8 @@ import LoadingSpinner from './UI elements/LoadingSpinner';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeCountries } from '../features/countries/countriesSlice';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import IconButton from '@mui/material/IconButton';
 
 const Countries = () => {
   const dispatch = useDispatch();
@@ -34,6 +36,21 @@ const Countries = () => {
             <CountryCard country={country} countries={countriesList} />
           </Grid>
         ))}
+      <IconButton onClick={() => window.scrollTo(0, 0)}>
+        <ArrowUpwardIcon
+          sx={{
+            position: 'fixed',
+            zIndex: '10',
+            color: 'red',
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            top: '60vh',
+            right: '0',
+            fontSize: '4rem',
+            padding: '0.5rem',
+          }}
+        />
+      </IconButton>
     </Grid>
   );
 };
