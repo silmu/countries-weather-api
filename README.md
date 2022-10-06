@@ -10,6 +10,9 @@ It shows detailed information about countries. Today's weather is shown for the 
 
 # Getting started
 
+! Important:
+To run this project you need to get a key from [OpenWeather API](https://openweathermap.org/).
+
 1. Clone repository
 2. Run `npm install` to install dependencies
 3. Create `.env` file.
