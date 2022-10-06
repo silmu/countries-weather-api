@@ -12,7 +12,12 @@ It shows detailed information about countries. Today's weather is shown for the 
 
 1. Clone repository
 2. Run `npm install` to install dependencies
-3. Run `npm start` to start the application
+3. Create `.env` file.
+4. Add your own weather API key in the `.env` file:
+```
+"REACT_APP_API_KEY=YOUR_OWN_WEATHER_API_KEY_HERE"
+```
+5. Run `npm start` to start the application
 
 # Tech stack
 
