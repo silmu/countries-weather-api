@@ -39,6 +39,7 @@ const CountrySingle = () => {
 
   useEffect(() => {
     getWeather(country);
+    //eslint-disable-next-line
   }, [country]);
 
   const findCountryByCode = code => {
