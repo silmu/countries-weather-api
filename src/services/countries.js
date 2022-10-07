@@ -7,4 +7,5 @@ const getAll = async () => {
   return response.data.sort((a, b) => (a.name.common < b.name.common ? -1 : 0));
 };
 
+// eslint-disable-next-line
 export default { getAll };

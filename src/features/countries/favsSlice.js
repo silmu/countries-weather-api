@@ -26,6 +26,7 @@ export const initializeFavorites = () => {
   if (favsFromLocal) {
     return setFavorites(favsFromLocal);
   }
+  //favsLocal || []
   return setFavorites([]);
 };
 
