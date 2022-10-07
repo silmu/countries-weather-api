@@ -31,7 +31,7 @@ const CountrySingle = () => {
         setDegrees(res.data.list[0].main.temp);
         setWeatherState(res.data.list[0].weather[0].description);
         setImgLink(
-          `http://openweathermap.org/img/wn/${res.data.list[0].weather[0]?.icon}@2x.png`
+          `https://openweathermap.org/img/wn/${res.data.list[0].weather[0]?.icon}@2x.png`
         );
       })
       .catch(err => console.log(err));
